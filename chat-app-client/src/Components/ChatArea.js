@@ -8,8 +8,16 @@ import MessageOthers from "./MessageOthers";
 import MessageSelf from "./MessageSelf";
 import { useSelector } from "react-redux";
 import { AnimatePresence, motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 const ChatArea = () => {
+  const userData = JSON.parse(localStorage.getItem("userData"));
+  console.log(userData);
+  const nav = useNavigate();
+  if (!userData) {
+    console.log("User not Authenticated...");
+    nav("/");
+  }
   const lightTheme = useSelector((state) => state.themeKey);
   const [conversations, setConversations] = useState([
     {
